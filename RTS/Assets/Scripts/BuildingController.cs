@@ -32,6 +32,8 @@ public class BuildingController : MonoBehaviour
         ghostSprite.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
         ghostSprite.sprite = buildingPrefabs[buildingType].GetComponent<SpriteRenderer>().sprite;
         buildings = new List<GameObject>();
+        PowerManagement pwr = new PowerManagement();
+
     }
 
     // Update is called once per frame
@@ -58,7 +60,13 @@ public class BuildingController : MonoBehaviour
             Vector3 position = gridSnappedPos;
             filter.useDepth = true;
             if (ghostCollider.OverlapCollider(filter, overlapped) == 0)
-                buildings.Add(Instantiate(buildingPrefabs[buildingType], position, Quaternion.identity));
+            {
+                if(pwr.testExcess(buildingPrefabs[buildingType] as ScriptableObject))
+                {
+                    buildings.Add(Instantiate(buildingPrefabs[buildingType], position, Quaternion.identity));
+                }
+                else Debug.Log("Not Enough Power to Support");
+            }
             else
             {
                 Debug.Log("Collision");
