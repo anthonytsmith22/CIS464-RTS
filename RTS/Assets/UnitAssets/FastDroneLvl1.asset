@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e6f583eea3b094790a2cb0ebeda5db, type: 3}
+  m_Name: FastDroneLvl1
+  m_EditorClassIdentifier: 
+  prefabName: Fast Drone Lvl 1
+  health: 100
+  healthRegen: 0
+  healthRegenRate: 0
+  movementSpeed: 5
+  attackSpeed: 5
+  isProjectile: 1
+  projectile: {fileID: 0}
+  visual: {fileID: 21300000, guid: 5db847a762e579841b1183f2a89cae90, type: 3}
+  scale: 1
+  level: 1
