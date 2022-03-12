@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Map
+  - Unit
+  - Key
+  - UnitRange
   layers:
   - Default
   - TransparentFX
@@ -12,16 +16,16 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Unit
+  - UnitIgnoreSelect
+  - UnitFaction0
+  - UnitFaction1
+  - UnitFaction2
+  - UnitFaction3
+  - BuildingFaction0
+  - BuildingFaction1
+  - BuildingFaction2
+  - BuildingFaction3
   - 
   - 
   - 
