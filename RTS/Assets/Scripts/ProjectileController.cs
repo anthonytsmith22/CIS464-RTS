@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileController : MonoBehaviour
 {
     // Necessary values from ScriptableObject ScriptableObject/ProjectileValues
     [SerializeField] private ProjectileValues Values;
     public string projectileName;
     public float projectileDamage;
-    public Sprite visual;
     private ForceMode2D forceMode;
     private float force;
+    private float speed = 10;
+    private Vector3 fireDirection;
 
     // Other attributes 
     Rigidbody2D rb;
@@ -26,9 +27,14 @@ public class ProjectileController : MonoBehaviour
         GetValues();
     }
 
+    private void Update(){
+        //transform.position += fireDirection * speed * Time.deltaTime;
+    }
+
     // Called in UnitControllerAPI when projectile is instantiated
     public virtual void Setup(Vector2 fireDirection, int faction){
         this.faction = faction;
+        this.fireDirection = fireDirection;
         Launch(fireDirection);
     }
 
@@ -39,15 +45,14 @@ public class ProjectileController : MonoBehaviour
     public virtual void GetValues(){ // Set object values to those in ScriptableObject
         projectileName = Values.projectileName;
         projectileDamage = Values.projectileDamage;
-        visual = Values.visual;
         forceMode = Values.forceMoce;
         force = Values.force;
     }
 
-    public virtual void OnColliderEnter2D(Collision2D other){  // Collision Management
+    private void OnTriggerEnter2D(Collider2D other){
         string otherTag = other.gameObject.tag;
         UnitControllerAPI unitController;
-        if(otherTag.Equals("Drone")){ // Logic regarding hitting drone/unit
+        if(otherTag.Equals("Unit")){ // Logic regarding hitting drone/unit
             unitController = other.transform.GetComponent<UnitControllerAPI>();
             if(unitController.FACTION == faction){ // If attack hits drone of same faction, ignore
                 return;
@@ -62,8 +67,12 @@ public class ProjectileController : MonoBehaviour
             return;
         }
         else if(otherTag.Equals("Environment")){
-            Destroy(gameObject);
+            
         }
+    }
+
+    public virtual void OnColliderEnter2D(Collision2D other){  // Collision Management
+        
     }
 
     public virtual void DoDamage(UnitControllerAPI unitController){ // Do damage to hit drone

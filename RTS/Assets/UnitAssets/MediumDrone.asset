@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e6f583eea3b094790a2cb0ebeda5db, type: 3}
-  m_Name: FastDroneLvl1
+  m_Name: MediumDrone
   m_EditorClassIdentifier: 
-  prefabName: Fast Drone Lvl 1
-  health: 100
+  prefabName: MediumDrone
+  health: 250
   healthRegen: 0
   healthRegenRate: 0
-  movementSpeed: 200
+  movementSpeed: 60
   canAttack: 1
-  attackSpeed: 60
+  attackSpeed: 30
   isProjectile: 1
-  projectile: {fileID: 5293164678592072344, guid: 384a256d805d7e74d9f9f279e094e12c, type: 3}
+  projectile: {fileID: 1101228310142235202, guid: ac837c369b0fe8745bd8367d8de44010, type: 3}
   hitScanDamage: 0
   scale: 1
   level: 1
-  range: 4
+  range: 5
