@@ -45,3 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Environment
+    uniqueID: 2119803431
+    locked: 0
+  - name: Building
+    uniqueID: 2277897127
+    locked: 0
+  - name: Unit
+    uniqueID: 717848099
+    locked: 0

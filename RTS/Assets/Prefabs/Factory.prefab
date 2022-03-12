@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdd7155c5bd923468515824714a8396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitPrefabs:
+  - {fileID: 1174173311899590927, guid: 91f9879729d482b4f9b2ea532caf1fdd, type: 3}
+  - {fileID: 3099761200718447421, guid: c1dc345ce0447ad4496faaa56feb7f80, type: 3}
+  - {fileID: 2608336348390612680, guid: 38e0767b340f0eb439678872f287c4ee, type: 3}
+  - {fileID: 4549713194659776362, guid: 32c7280b6753cfc41a2cb1559e5e0a92, type: 3}
 --- !u!114 &3916340927425811109
 MonoBehaviour:
   m_ObjectHideFlags: 0

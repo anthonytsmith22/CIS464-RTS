@@ -101,7 +101,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 239151961
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 1000
   m_Sprite: {fileID: 21300000, guid: afd8e8e237cfe4044934d1c50b49e460, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -244,6 +244,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 1101228310142235202, guid: ac837c369b0fe8745bd8367d8de44010, type: 3}
   potentialTargets: []
   unitHealthController: {fileID: 5922884888283486274}
+  lineRenderer: {fileID: 0}
 --- !u!212 &3476791614741342695
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -281,7 +282,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 239151961
+  m_SortingLayerID: 717848099
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3073496d6a2af6542a685a04660e3f46, type: 3}

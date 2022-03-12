@@ -128,6 +128,7 @@ public class BuildingController : MonoBehaviour
             if (ghostCollider.OverlapCollider(filter, overlapped) == 0)
             {
                 var newBuilding = Instantiate(newBuildingPrefab, position, Quaternion.identity);
+                newBuilding.transform.parent = transform.parent;
                 buildings.Add(newBuilding);
                 BuildMode = false;
                 newBuildingPrefab = null;

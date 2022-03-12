@@ -86,13 +86,15 @@ MonoBehaviour:
   FACTION: 0
   CurrentHealth: 0
   isEngaged: 0
-  firePoint: {fileID: 0}
+  firePoints: []
   UnitTarget: {fileID: 0}
   UnitTargetTransform: {fileID: 0}
   PositionTarget: {x: 0, y: 0, z: 0}
   Map: {fileID: 0}
   ProjectilePrefab: {fileID: 0}
   potentialTargets: []
+  unitHealthController: {fileID: 0}
+  lineRenderer: {fileID: 0}
 --- !u!212 &6428735772308227999
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 239151961
+  m_SortingLayerID: 717848099
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 58d38a3a7eeb9f74691896d246a6fc4e, type: 3}
@@ -230,7 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6784741cb161c3e46b1377f337ea2416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reconDroneController: {fileID: 0}
+  HeldKey: {fileID: 0}
+  keyDroneController: {fileID: 0}
 --- !u!1 &5975539415199030449
 GameObject:
   m_ObjectHideFlags: 0
