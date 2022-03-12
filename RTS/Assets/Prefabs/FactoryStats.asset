@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildCost: 100
   MaxHP: 100
-  EnergyConsumption: 100
+  EnergyConsumption: 30
   EnergyProduction: 0

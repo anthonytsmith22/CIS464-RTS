@@ -15,4 +15,4 @@ MonoBehaviour:
   BuildCost: 200
   MaxHP: 50
   EnergyConsumption: 0
-  EnergyProduction: 30
+  EnergyProduction: 100
