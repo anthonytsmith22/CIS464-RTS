@@ -6,33 +6,47 @@ using UnityEngine;
 public class BuildingController : MonoBehaviour
 {
 
-    public GameObject[] buildingPrefabs;
+    private bool buildMode;
+    public bool BuildMode 
+    { 
+        get => buildMode; 
+        set 
+        {
+            buildGhost.SetActive(value);
+            buildOutline.SetActive(value);
+            buildMode = value;
+        } 
+    }
+
     public float CameraPanSpeed;
     
-    GameObject buildGhost;
-    int buildingType;
+    public GameObject buildOutline;
 
+    GameObject buildGhost, newBuildingPrefab;
     Camera mainCam;
-    SpriteRenderer ghostSprite;
+    SpriteRenderer ghostSprite, outlineSprite;
+    public LineRenderer lineRenderer;
     BoxCollider2D ghostCollider;
 
-    List<GameObject> buildings;
-
+    public List<GameObject> buildings;
+    List<Vector3> powerLinePositions;
     Collider2D[] overlapped = new Collider2D[30];
 
     // Start is called before the first frame update
     void Start()
     {
-        buildingType = 0;
         mainCam = Camera.main;
         buildGhost = new GameObject("BuildGhost");
         ghostSprite = buildGhost.AddComponent<SpriteRenderer>();
         ghostCollider = buildGhost.AddComponent<BoxCollider2D>();
         ghostCollider.size = new Vector2(2.5f, 2.5f);
         ghostSprite.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
-        ghostSprite.sprite = buildingPrefabs[buildingType].GetComponent<SpriteRenderer>().sprite;
+        BuildMode = false;
+
         buildings = new List<GameObject>();
-        PowerManagement pwr = new PowerManagement();
+        //powerLines.forceRenderingOff = true;
+
+        powerLinePositions = new List<Vector3>();
 
     }
 
@@ -46,8 +60,60 @@ public class BuildingController : MonoBehaviour
         Vector3 gridSnappedPos = new Vector3();
         gridSnappedPos.x = Mathf.Floor(mousePosWorld.x);
         gridSnappedPos.y = Mathf.Floor(mousePosWorld.y);
+        gridSnappedPos.z = 0;
 
+        if (BuildMode)
+        {
+            if (Input.GetMouseButtonDown(1))
+                BuildMode = false;
+            buildingPlacement(gridSnappedPos);
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                foreach (var b in buildings)
+                {
+                    // deselect everything
+                    b.GetComponent<Building>().Selected = false;
+
+                    // if collision with mouse, select this building
+                    if (b.GetComponent<BoxCollider2D>().OverlapPoint(mousePosWorld))
+                    {
+                        Building building = b.GetComponent<Building>();
+                        building.Selected = true;
+                    }
+                }
+            }
+        }
+
+        updateCamera();
+
+    }
+
+    public void RemoveDead()
+    {
+        List<GameObject> dead = buildings.FindAll(b => b.GetComponent<Building>().Dead);
+
+        buildings.RemoveAll(b => b.GetComponent<Building>().Dead);
+
+        foreach (var d in dead)
+            Destroy(d);
+
+    }
+
+    public void CreateBuilding(GameObject prefab)
+    {
+        newBuildingPrefab = prefab;
+        ghostSprite.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+        BuildMode = true;
+    }
+
+    void buildingPlacement(Vector3 gridSnappedPos)
+    {
         buildGhost.transform.position = gridSnappedPos;
+        buildOutline.transform.position = gridSnappedPos;
 
         ContactFilter2D filter = new ContactFilter2D();
         if (ghostCollider.OverlapCollider(filter, overlapped) == 0)
@@ -61,31 +127,18 @@ public class BuildingController : MonoBehaviour
             filter.useDepth = true;
             if (ghostCollider.OverlapCollider(filter, overlapped) == 0)
             {
-                if(pwr.testExcess(buildingPrefabs[buildingType] as ScriptableObject))
-                {
-                    buildings.Add(Instantiate(buildingPrefabs[buildingType], position, Quaternion.identity));
-                }
-                else Debug.Log("Not Enough Power to Support");
+                var newBuilding = Instantiate(newBuildingPrefab, position, Quaternion.identity);
+                buildings.Add(newBuilding);
+                BuildMode = false;
+                newBuildingPrefab = null;
             }
             else
             {
                 Debug.Log("Collision");
+                overlapped[0].GetComponent<Building>().HP -= 5;
             }
 
-
-
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            buildingType++;
-            buildingType %= buildingPrefabs.Length;
-            ghostSprite.sprite = buildingPrefabs[buildingType].GetComponent<SpriteRenderer>().sprite;
-            // select building to place
-        }
-
-        updateCamera();
-
     }
 
     void updateCamera()
