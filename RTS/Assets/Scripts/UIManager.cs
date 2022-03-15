@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject BuildMenu;
     public GameObject FactoryPanel;
+    public UnitSelector selector;
 
     #region Singleton
     private static UIManager instance;
@@ -25,6 +26,10 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    private void Start(){
+        selector = GameObject.Find("Player").transform.GetComponent<UnitSelector>();
+    }
+
     public void OpenFactoryUI(){
         FactoryPanel.SetActive(true);
         BuildMenu.SetActive(false);
@@ -35,4 +40,8 @@ public class UIManager : MonoBehaviour
         BuildMenu.SetActive(true);
     }
 
+    public void SelectUnitType(int type){
+        Debug.Log("check");
+        selector.selectedFactory.SetProductionTarget(type);
+    }
 }

@@ -25,8 +25,10 @@ public class UnitSelector : MonoBehaviour
 
     private void Update(){
         if(InputListener.Instance.primaryDown){      
-            UnitSelect();
-            
+            RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0.1f, LayerMask.GetMask("UI"));
+            if(hit.transform == null){
+                UnitSelect();
+            }    
         }
 
         if(InputListener.Instance.secondaryDown){

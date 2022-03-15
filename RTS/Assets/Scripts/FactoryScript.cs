@@ -11,7 +11,7 @@ public class FactoryScript : MonoBehaviour
     public GameObject FactoryUI;
     private Building building;
 
-    int TargetUnit = 3;
+    public int TargetUnit = 3;
 
     float productionTime = 5.0f;
     float productionTimer = 0.0f;
