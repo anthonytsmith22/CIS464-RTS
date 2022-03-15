@@ -322,6 +322,7 @@ public class UnitControllerAPI : MonoBehaviour
         Vector3 differenceVector = PositionTarget - transform.position; // Get the difference between unit's current position and targetLocation
         if(differenceVector.magnitude <= positionMargin){ // Check if unit is at target position
             shouldMove = false; // If so, disable movement
+            rb.velocity = Vector3.zero;
             return;
         }
         Vector3 newVelocity = differenceVector.normalized * movementSpeed * Time.fixedDeltaTime;
@@ -353,6 +354,8 @@ public class UnitControllerAPI : MonoBehaviour
     }  
 
     private void SetUnitPositionTarget(Transform unitTarget){ // Use to set unit target position
+        if (ReferenceEquals(unitTarget, transform))
+            return;
         UnitTargetTransform = unitTarget;
         PositionTarget = UnitTargetTransform.position;
         shouldMove = true;
@@ -360,6 +363,7 @@ public class UnitControllerAPI : MonoBehaviour
     }
 
     public void SetPositionTarget(Vector3 target){ // Use to set a non-unit target position
+        target.z = 0;
         PositionTarget = target;
         shouldMove = true;
         moveAtUnit = false;

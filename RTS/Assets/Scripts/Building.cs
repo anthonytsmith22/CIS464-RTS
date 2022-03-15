@@ -12,8 +12,14 @@ public class Building : MonoBehaviour
     public GameObject BuildingUI;
 
     public UnityEvent OnSelected;
+    private AudioSource explodeSfx;
 
     public bool Dead { get; private set; }
+
+    void Awake()
+    {
+        explodeSfx = GetComponent<AudioSource>();
+    }
 
     private bool selected;
     public bool Selected 
@@ -53,5 +59,6 @@ public class Building : MonoBehaviour
     void explode()
     {
         Dead = true;
+        explodeSfx.Play();
     }
 }

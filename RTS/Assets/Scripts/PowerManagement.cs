@@ -36,9 +36,7 @@ public class PowerManagement : MonoBehaviour
         {
             Building buildComponent = building.GetComponent<Building>();
             production += buildComponent.Stats.EnergyProduction;
-            consumption += buildComponent.Stats.EnergyConsumption;
-
-            
+            consumption += buildComponent.Stats.EnergyConsumption;            
         }
 
         PowerText.text = $"Power: {production} / {consumption} MW";
@@ -48,52 +46,6 @@ public class PowerManagement : MonoBehaviour
         else
             PowerBar.value = 0;
     }
-
-    // public bool addToPowerGrid(Object consumer)
-    // {
-    //     if ( consumer.power + powerConsumed - ( (powerGenerated >= excessCapacity) ? 0 : Mathf.Floor( -Mathf.Exp(powerConsumed/Mathf.Sqrt(10*excessCapacity) , 4 ) + excessCapacity) ) <= powerGenerated) //scaling difficulty allows building without dristributors early game
-    //     {
-    //         powerConsumed += consumer.power;
-
-    //         Debug.Log("Added new building to grid, now consuming " + powerConsumed);
-    //         return true;
-    //     }
-
-    //     else
-    //     {
-    //         Debug.Log("Adding building exceeded available grid space, did not connect to grid");
-    //         return false;
-    //     }
-    // }
-
-    // public void removeFromGrid(Object consumer)
-    // {
-    //     powerConsumed -= consumer.power;
-    // }
-
-    // public void removeFromDistribution(Object distributor)
-    // {
-    //     powerGenerated -= distributor.generated;
-    // }
-
-    // public void addToDistribution(Object distributor)
-    // {
-    //     powerGenerated += distributor.generated;
-    // }
-
-    // public float getProductionFactor()
-    // {
-    //     return Mathf.Min(powerGenerated / powerConsumed , 6.0f);
-    // }
-
-    // public static bool testExcess(GameObject building){
-    //     if( powerGenerated + building.EnergyConsumption - building.EnergyProduction < excessCapacity ){
-    //         powerConsumed += building.EnergyConsumption;
-    //         powerGenerated += building.EnergyProduction;
-    //         return true;
-    //     }
-    //     else return false;
-    // }
 
     
 }

@@ -8,6 +8,7 @@ public class FactoryScript : MonoBehaviour
     public GameObject[] UnitPrefabs;
 
     public PowerManagement PowerManager;
+    public GameObject FactoryUI;
 
     int TargetUnit = 3;
 
@@ -35,10 +36,15 @@ public class FactoryScript : MonoBehaviour
 
     }
 
+    public void SetProductionTarget(int target)
+    {
+        TargetUnit = target;
+    }
 
     public void OnSelected()
     {
         Debug.Log("Factory Selected");
+
     }
 
 }

@@ -129,8 +129,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 717848099
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &9176017622992996343
 MonoBehaviour:
@@ -342,7 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783815091737817659}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BuildingHPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

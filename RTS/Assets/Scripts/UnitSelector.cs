@@ -13,6 +13,7 @@ public class UnitSelector : MonoBehaviour
     public List<UnitControllerAPI> selectedUnits = new List<UnitControllerAPI>();
     private List<ToggleSelectOutline> selectedUnitsOutlines = new List<ToggleSelectOutline>();
     public List<Transform> selectedUnitsTransforms = new List<Transform>();
+    public GameObject FlagPrefab;
     private void Awake(){
         unitLayer = LayerMask.GetMask("UnitFaction0");
         SetSelectLayerMask(new int[]{0,1,2,3});
@@ -31,7 +32,7 @@ public class UnitSelector : MonoBehaviour
 
     private void SetSelectLayerMask(int[] factions) {
         int count = factions.Length;
-        string[] layers = new string[count*2];
+        string[] layers = new string[count*2 + 1];
         StringBuilder sb = new StringBuilder();
         int i;
         // Add unit factions
@@ -48,6 +49,14 @@ public class UnitSelector : MonoBehaviour
             sb.Append(factions[i]);
             layers[count + i] = sb.ToString();
         }
+
+        sb.Clear();
+        sb.Append("Map");
+        layers[count * 2] = sb.ToString();
+
+        foreach (var l in layers)
+            Debug.Log(l);
+
         selectableLayer = LayerMask.GetMask(layers);
         layers = null;
     }
@@ -103,23 +112,36 @@ public class UnitSelector : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0.1f, selectableLayer);
         Transform target = hit.transform;
         string targetTag;
+
         if(target != null){  // Did we select a unit
             targetTag = target.transform.tag;
+            Debug.Log(targetTag);
             if(targetTag.Equals("Unit")){
                 // Selected Unit
+                Debug.Log("Unit");
                 UnitControllerAPI targetUnit = target.GetComponent<UnitControllerAPI>();
                 SetUnitTarget(targetUnit);
                 return;
             }else if(targetTag.Equals("Building")){
                 // Selected Building
+                Debug.Log("Building");
             }else if(targetTag.Equals("Map")){
                 // Selected Map
+                Debug.Log("MAP");
+                Vector3 targetPosition = target.position;
+                SetPositionTarget(targetPosition);
+            }
+            else
+            {
                 Vector3 targetPosition = target.position;
                 SetPositionTarget(targetPosition);
             }
         }else{
             Vector3 targetPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            targetPosition.z = 0;
             SetPositionTarget(targetPosition);
+            GameObject flag = Instantiate(FlagPrefab, targetPosition, Quaternion.identity);
+            Destroy(flag, 2.5f);
         }
     }
 

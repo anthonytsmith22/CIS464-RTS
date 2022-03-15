@@ -15,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Building
   - Unit
   - UnitIgnoreSelect
   - UnitFaction0
@@ -26,7 +26,7 @@ TagManager:
   - BuildingFaction1
   - BuildingFaction2
   - BuildingFaction3
-  - 
+  - PowerColliders
   - 
   - 
   - 

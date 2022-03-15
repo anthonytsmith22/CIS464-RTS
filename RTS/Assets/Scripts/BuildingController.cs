@@ -21,15 +21,11 @@ public class BuildingController : MonoBehaviour
     public float CameraPanSpeed;
     
     public GameObject buildOutline;
-
     GameObject buildGhost, newBuildingPrefab;
     Camera mainCam;
     SpriteRenderer ghostSprite, outlineSprite;
-    public LineRenderer lineRenderer;
     BoxCollider2D ghostCollider;
-
     public List<GameObject> buildings;
-    List<Vector3> powerLinePositions;
     Collider2D[] overlapped = new Collider2D[30];
 
     // Start is called before the first frame update
@@ -44,10 +40,6 @@ public class BuildingController : MonoBehaviour
         BuildMode = false;
 
         buildings = new List<GameObject>();
-        //powerLines.forceRenderingOff = true;
-
-        powerLinePositions = new List<Vector3>();
-
     }
 
     // Update is called once per frame
@@ -88,7 +80,7 @@ public class BuildingController : MonoBehaviour
             }
         }
 
-        updateCamera();
+        
 
     }
 
@@ -107,6 +99,7 @@ public class BuildingController : MonoBehaviour
     {
         newBuildingPrefab = prefab;
         ghostSprite.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+        ghostSprite.sortingLayerName = "Building";
         BuildMode = true;
     }
 
@@ -116,6 +109,7 @@ public class BuildingController : MonoBehaviour
         buildOutline.transform.position = gridSnappedPos;
 
         ContactFilter2D filter = new ContactFilter2D();
+        filter.layerMask = LayerMask.GetMask("Building");
         if (ghostCollider.OverlapCollider(filter, overlapped) == 0)
             ghostSprite.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
         else
@@ -136,17 +130,10 @@ public class BuildingController : MonoBehaviour
             else
             {
                 Debug.Log("Collision");
-                overlapped[0].GetComponent<Building>().HP -= 5;
+                // play sound
             }
 
         }
     }
 
-    void updateCamera()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-
-        mainCam.transform.position +=  Time.deltaTime * CameraPanSpeed * new Vector3(x, y, 0.0f);
-    }
 }
