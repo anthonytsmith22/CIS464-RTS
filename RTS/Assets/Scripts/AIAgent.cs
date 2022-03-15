@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIAgent : MonoBehaviour
+public class AIAgent : Player
 {
     // An individual AI player
-
-    public PowerManagement PowerManagement;
-    public BuildingController BuildingController;
-
+    private Player playerController;
+    private List<Player> otherFactions; 
+    private List<FactoryScript> Factories = new List<FactoryScript>();
     enum CurrentState
     {
         GrowPower,
@@ -18,7 +17,11 @@ public class AIAgent : MonoBehaviour
     };
 
     CurrentState State;
-    // Player CurrentTarget = null;
+    Player CurrentTarget = null;
+
+    private void Awake(){
+        otherFactions.Add(playerController);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -29,27 +32,27 @@ public class AIAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
 
-        Determine who to attack
-        foreach (otherPlayer)
+        // Determine who to attack
+        foreach (Player otherFaction in otherFactions)
         {
-            float threat = calcThreatLevel(otherPlayer);
+            float threat = calcThreatLevel(otherFaction);
             if (threat > 1000.0f)
             {
-                state = Atacking;
-                CurrentTarget = otherPlayer;
+                State = CurrentState.Attacking;
+                CurrentTarget = otherFaction;
             }
 
         }
 
         // no point in attacking if the army is way too small, 1.5x buffer zone since the AI won't be nearly as intelligent as the player at unit manipulation
-        if (UnitCount < Player.UnitCount * 1.5f)
+        if (GetNumDrones() < playerController.GetNumDrones() * 1.5f)
         {
             State = CurrentState.GrowArmy;
         }
 
-        */
+        
 
         // power takes priority over units
         if (PowerManagement.Satisfaction < 1.0f)
@@ -81,13 +84,14 @@ public class AIAgent : MonoBehaviour
     void growPower()
     {
         // call upon BuildController to make new Power Plants and Power Towers
+
     }
 
     void growArmy()
     {
         // call upon BuildController to make new Factories
         // createFactories();
-        
+        Vector3 newFactoryPosition;
         // queueUnits();
     }
 
@@ -108,7 +112,7 @@ public class AIAgent : MonoBehaviour
     }
 
     // computes the threat level of a given player / AI agent
-    float calcThreatLevel()
+    float calcThreatLevel(Player otherFaction)
     {
         float threat = 0.0f;
 
@@ -116,11 +120,15 @@ public class AIAgent : MonoBehaviour
 
         // prioritize closer players
         // threat += 1.0f / (them.SpawnPos - this.SpawnPos).magnitude * 100.0f;
+        threat += 1.0f / (otherFaction.transform.position - transform.position).magnitude * 100.0f;
         // threat += them.KeyCount * 1000.0f;
+        threat += otherFaction.HeldKeys.Count * 1000.0f;
         // threat += them.UnitCount * 300.0f;
+        threat += otherFaction.GetNumDrones() * 300.0f;
         // threat += them.PowerProduction * 200.0f;
-
+        threat += otherFaction.PowerManagement.production * 200.0f;
 
         return threat;
     }
+
 }
