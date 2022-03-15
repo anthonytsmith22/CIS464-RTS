@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 
     public void Setup(int faction){
         FACTION = faction;
+        PowerManagement.FACTION = faction;
+        BuildingController.FACTION = faction;
     }
 
     public virtual int GetNumDrones(){

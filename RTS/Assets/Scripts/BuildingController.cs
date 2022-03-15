@@ -125,6 +125,8 @@ public class BuildingController : MonoBehaviour
             {
                 var newBuilding = Instantiate(newBuildingPrefab, position, Quaternion.identity);
                 newBuilding.transform.parent = transform.parent;
+                Building building = newBuilding.GetComponent<Building>();
+                building.FACTION = FACTION;
                 buildings.Add(newBuilding);
                 BuildMode = false;
                 newBuildingPrefab = null;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PowerManagement : MonoBehaviour
 {
 
-
+    public int FACTION;
     public Slider PowerBar;
     public Text PowerText;
 

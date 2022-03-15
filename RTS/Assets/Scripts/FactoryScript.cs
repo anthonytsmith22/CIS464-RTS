@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class FactoryScript : MonoBehaviour
 {
-
+    int faction;
     public GameObject[] UnitPrefabs;
 
     public PowerManagement PowerManager;
     public GameObject FactoryUI;
+    private Building building;
 
     int TargetUnit = 3;
 
     float productionTime = 5.0f;
     float productionTimer = 0.0f;
+
+    private void Awake(){
+        building.GetComponent<Building>();
+        faction = building.FACTION;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +36,8 @@ public class FactoryScript : MonoBehaviour
         if (productionTimer >= productionTime)
         {
             var unit = Instantiate(productionTarget, transform.position, transform.rotation);
+            UnitControllerAPI unitController = unit.GetComponent<UnitControllerAPI>();
+            unitController.FACTION = faction;
             unit.transform.parent = transform.parent;
             productionTimer = 0.0f;
         }
