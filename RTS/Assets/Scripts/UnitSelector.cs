@@ -9,13 +9,16 @@ public class UnitSelector : MonoBehaviour
     private const int FACTION = 0; // Player is always faction 0
     private Camera mainCamera;
     private LayerMask unitLayer;
+    private LayerMask buildingLayer;
     private LayerMask selectableLayer;
     public List<UnitControllerAPI> selectedUnits = new List<UnitControllerAPI>();
     private List<ToggleSelectOutline> selectedUnitsOutlines = new List<ToggleSelectOutline>();
     public List<Transform> selectedUnitsTransforms = new List<Transform>();
+    public FactoryScript selectedFactory;
     public GameObject FlagPrefab;
     private void Awake(){
         unitLayer = LayerMask.GetMask("UnitFaction0");
+        buildingLayer = LayerMask.GetMask("Building");
         SetSelectLayerMask(new int[]{0,1,2,3});
         mainCamera = Camera.main;
     }
@@ -23,6 +26,7 @@ public class UnitSelector : MonoBehaviour
     private void Update(){
         if(InputListener.Instance.primaryDown){      
             UnitSelect();
+            
         }
 
         if(InputListener.Instance.secondaryDown){
@@ -49,7 +53,7 @@ public class UnitSelector : MonoBehaviour
             sb.Append(factions[i]);
             layers[count + i] = sb.ToString();
         }
-
+        sb.Append("Building");
         sb.Clear();
         sb.Append("Map");
         layers[count * 2] = sb.ToString();
@@ -85,8 +89,30 @@ public class UnitSelector : MonoBehaviour
                 }
             }
         }else{
-            ClearSelectedUnits();
+            BuildingSelect();
         }         
+    }
+
+    private void BuildingSelect(){
+        RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0.1f, buildingLayer);
+        Transform building = hit.transform;
+        if(building != null){
+            Building hitBuilding = building.GetComponent<Building>();
+            int faction = hitBuilding.FACTION;
+            if(faction == FACTION){
+                ToggleSelectOutline selector = hitBuilding.GetComponent<ToggleSelectOutline>();
+                selector.ToggleOutline();
+                ClearSelectedUnits();
+                selectedFactory = hitBuilding.GetComponent<FactoryScript>();
+                selectedUnitsTransforms.Add(hitBuilding.transform);
+                UnitSelectEnter();
+            }
+            Debug.Log("Building");
+            UIManager.Instance.OpenFactoryUI();
+        }else{
+            ClearSelectedUnits();
+            UIManager.Instance.CloseFactoryUI();
+        }
     }
 
     private void AddSelectedUnit(UnitControllerAPI selectedUnit, ToggleSelectOutline selectedOutline){
@@ -103,6 +129,10 @@ public class UnitSelector : MonoBehaviour
             if(selectedUnitsOutlines[i] == null){ i++;}
             else{ selectedUnitsOutlines[i].ToggleOutline(); }
         }
+        if(selectedFactory != null){
+            selectedFactory.GetComponent<ToggleSelectOutline>().ToggleOutline();
+        }
+        selectedFactory = null;
         selectedUnits.Clear();
         selectedUnitsOutlines.Clear();
         selectedUnitsTransforms.Clear();
