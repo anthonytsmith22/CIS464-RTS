@@ -357,6 +357,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91f9879729d482b4f9b2ea532caf1fdd, type: 3}
+--- !u!1 &508293242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4629111103065952991, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
+  m_PrefabInstance: {fileID: 1981711587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &513933225
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +374,9 @@ GameObject:
   - component: {fileID: 513933226}
   - component: {fileID: 513933228}
   - component: {fileID: 513933229}
+  - component: {fileID: 513933231}
+  - component: {fileID: 513933230}
+  - component: {fileID: 513933232}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -390,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedUnits: []
   selectedUnitsTransforms: []
+  selectedFactory: {fileID: 0}
   FlagPrefab: {fileID: 2498517605023854563, guid: 6e5b81f880bfe7443a4689327327398c, type: 3}
 --- !u!4 &513933227
 Transform:
@@ -401,9 +410,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1870512824}
-  - {fileID: 1478809445}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -451,13 +458,61 @@ MonoBehaviour:
   threatRating: 0
   unitID: 0
   FACTION: 0
-  PowerManagement: {fileID: 1870512825}
-  BuildingController: {fileID: 1478809446}
+  PowerManagement: {fileID: 513933231}
+  BuildingController: {fileID: 513933230}
   HeldKeys: []
   fastDrones: []
   mediumDrones: []
   heavyDrones: []
   keyDrones: []
+--- !u!114 &513933230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513933225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fa7d38abf6eba4ca83fc8f82548c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FACTION: 0
+  CameraPanSpeed: 0
+  buildOutline: {fileID: 1755905197}
+  buildings: []
+--- !u!114 &513933231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513933225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd92b375dd90f84b9f8c83bd12563ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FACTION: 0
+  PowerBar: {fileID: 1981711589}
+  PowerText: {fileID: 1981711588}
+  production: 0
+  consumption: 0
+  buildingController: {fileID: 513933230}
+--- !u!114 &513933232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513933225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7428d18a6f19a24caa4d05439637a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildMenu: {fileID: 508293242}
+  FactoryPanel: {fileID: 1919570394}
 --- !u!1 &588204741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,53 +1866,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009f979707e3b8f49ab43edd64ac98f5, type: 3}
---- !u!1 &1478809444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1478809445}
-  - component: {fileID: 1478809446}
-  m_Layer: 0
-  m_Name: BuildingController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1478809445
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478809444}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17142351, y: -0.78497225, z: 4.429631}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 513933227}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1478809446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478809444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8fa7d38abf6eba4ca83fc8f82548c35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FACTION: 0
-  CameraPanSpeed: 25
-  buildOutline: {fileID: 1755905197}
-  buildings: []
 --- !u!1001 &1646929886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4746,55 +4754,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1870512823
+--- !u!1 &1919570394 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1953132326300562599, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
+  m_PrefabInstance: {fileID: 1981711587}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1870512824}
-  - component: {fileID: 1870512825}
-  m_Layer: 0
-  m_Name: PowerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1870512824
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870512823}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 732.07855, y: 363.21637, z: 4.429631}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 513933227}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1870512825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870512823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd92b375dd90f84b9f8c83bd12563ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FACTION: 0
-  PowerBar: {fileID: 1981711589}
-  PowerText: {fileID: 1981711588}
-  production: 15
-  consumption: 0
-  buildingController: {fileID: 1478809446}
 --- !u!1001 &1942632409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4923,7 +4887,7 @@ PrefabInstance:
     - target: {fileID: 4629111103118436155, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1478809446}
+      objectReference: {fileID: 513933230}
     - target: {fileID: 4629111103118436155, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CreateBuilding
@@ -5023,7 +4987,7 @@ PrefabInstance:
     - target: {fileID: 4629111103477595097, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1478809446}
+      objectReference: {fileID: 513933230}
     - target: {fileID: 4629111103477595097, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CreateBuilding
@@ -5031,7 +4995,7 @@ PrefabInstance:
     - target: {fileID: 4629111103848664819, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1478809446}
+      objectReference: {fileID: 513933230}
     - target: {fileID: 4629111103848664819, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CreateBuilding
