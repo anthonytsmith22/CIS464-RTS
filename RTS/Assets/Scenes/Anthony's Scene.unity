@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedUnits: []
   selectedUnitsTransforms: []
+  FlagPrefab: {fileID: 2498517605023854563, guid: 6e5b81f880bfe7443a4689327327398c, type: 3}
 --- !u!4 &513933227
 Transform:
   m_ObjectHideFlags: 0
@@ -1857,6 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fa7d38abf6eba4ca83fc8f82548c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FACTION: 0
   CameraPanSpeed: 25
   buildOutline: {fileID: 1755905197}
   buildings: []
