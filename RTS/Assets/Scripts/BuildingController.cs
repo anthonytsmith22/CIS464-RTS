@@ -6,6 +6,8 @@ using UnityEngine;
 public class BuildingController : MonoBehaviour
 {
 
+    public int FACTION;
+
     private bool buildMode;
     public bool BuildMode 
     { 

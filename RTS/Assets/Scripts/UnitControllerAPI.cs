@@ -56,6 +56,12 @@ public class UnitControllerAPI : MonoBehaviour
 
     // List of targets
     public List<UnitControllerAPI> potentialTargets = new List<UnitControllerAPI>();
+
+
+    // list of building targets
+    public List<Building> potentialBuildingTargets = new List<Building>();
+    public Building buildingTarget;
+
     // Healthbar controller
     [SerializeField] UnitHealth unitHealthController;
     // Own Collider
@@ -236,11 +242,11 @@ public class UnitControllerAPI : MonoBehaviour
         if(hit.collider != null){ // Check for hit
             // Check if it is a unit or building and faction
             if(hit.transform.tag.Equals("Building")){
-                // BuildingController building = hit.transform.GetComponent<BuildingController>(); // Get building controller
-                // int faction = building.FACTION;  // get faction
-                // if(faction != FACTION){ // if building is not from this faction, damage it
-                    // building.DoDamage(damage);
-                // }
+                Building building = hit.transform.GetComponent<Building>(); // Get building controller
+                int faction = building.FACTION;  // get faction
+                if(faction != FACTION){ // if building is not from this faction, damage it
+                    building.HP -= (int)hitScanDamage;
+                }
             }else if(hit.transform.tag.Equals("Unit")){
                 UnitControllerAPI unitController = hit.transform.GetComponent<UnitControllerAPI>();
                 int faction = unitController.FACTION;
@@ -292,7 +298,11 @@ public class UnitControllerAPI : MonoBehaviour
             if(potentialTargets.Count > 0){ // Check for viable target
                 UnitTarget = potentialTargets[0];
                 SetUnitPositionTarget(UnitTarget.transform);
-            }else{ // No new target to engage in
+            }
+            else if(potentialBuildingTargets.Count > 0){
+                SetBuildingTarget(potentialBuildingTargets[0]);
+            }
+            else{ // No new target to engage in
                 SetPositionTarget(transform.position);
                 Debug.Log("Reset position");
                 shouldMove = false;
@@ -358,6 +368,10 @@ public class UnitControllerAPI : MonoBehaviour
             return;
         UnitTargetTransform = unitTarget;
         PositionTarget = UnitTargetTransform.position;
+        if(buildingTarget != null){
+            potentialBuildingTargets.Add(buildingTarget);
+            buildingTarget = null;
+        }
         shouldMove = true;
         moveAtUnit = true;
     }
@@ -373,8 +387,23 @@ public class UnitControllerAPI : MonoBehaviour
         PositionTarget = transform.position;
     }
 
+    public void SetBuildingTarget(Building building){
+        if(ReferenceEquals(building, transform)){
+            return;
+        }
+        this.buildingTarget = building;
+        PositionTarget = building.transform.position;
+        if(UnitTarget != null){
+            potentialTargets.Add(UnitTarget);
+            UnitTargetTransform = null;
+        }
+        shouldMove = true;
+        moveAtUnit = false;
+    }
+
     public virtual void RemoveTarget(){ // Removes current target
         UnitTarget = null;
+        buildingTarget = null;
     }
 
     public virtual void Death(){  // Unit death logic
@@ -401,12 +430,23 @@ public class UnitControllerAPI : MonoBehaviour
     public void AddTarget(UnitControllerAPI otherUnit){
         if(otherUnit.FACTION == FACTION || potentialTargets.Contains(otherUnit)){ return; }
         if(UnitTarget == null){ // Check if unit doesn't have an active target
-            UnitTarget = otherUnit;
+            SetUnitTarget(otherUnit);
             EngageCombat();  // Engage in combat
         }else if(UnitTarget == otherUnit){
             ResetCombat();
         }else{
             potentialTargets.Add(otherUnit);
+        }
+    }
+
+    public void AddTarget(Building otherBuilding){
+        if(otherBuilding.FACTION == FACTION || potentialBuildingTargets.Contains(otherBuilding)){ return; }
+        if(buildingTarget == null && UnitTarget == null){
+            SetBuildingTarget(otherBuilding);
+            EngageCombat();
+        }
+        else{
+            potentialBuildingTargets.Add(buildingTarget);
         }
     }
     public virtual void OnTriggerExit2D(Collider2D other){

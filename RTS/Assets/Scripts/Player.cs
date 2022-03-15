@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public string username;
     public float powerReserve;
     public int keysCollected;

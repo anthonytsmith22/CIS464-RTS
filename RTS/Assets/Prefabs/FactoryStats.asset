@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FactoryStats
   m_EditorClassIdentifier: 
   BuildCost: 100
-  MaxHP: 100
+  MaxHP: 600
   EnergyConsumption: 30
   EnergyProduction: 0

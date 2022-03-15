@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515ad3188c31c4349b3920fff0054e23, type: 3}
   m_Name: PowerPlantStats
   m_EditorClassIdentifier: 
-  BuildCost: 200
+  BuildCost: 400
   MaxHP: 50
   EnergyConsumption: 0
   EnergyProduction: 100

@@ -64,6 +64,11 @@ public class ProjectileController : MonoBehaviour
             // Check building faction
             // Get building component
             // DoDamage(BuildingControllerAPI buildingController);
+            Building otherBuilding = other.transform.GetComponent<Building>();
+            if(otherBuilding.FACTION == faction){
+                return;
+            }
+            otherBuilding.HP -= (int)projectileDamage;
             return;
         }
         else if(otherTag.Equals("Environment")){

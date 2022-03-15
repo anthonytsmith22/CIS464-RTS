@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Building : MonoBehaviour
 {
-
+    public int FACTION;
     public BuildingStats Stats;
     public Slider HPBar;
     public GameObject BuildingUI;

@@ -17,12 +17,20 @@ public class UnitTargeter : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other){
+        int otherFaction;
         string otherTag = other.tag;
         if(otherTag.Equals("Unit")){
             UnitControllerAPI otherUnit = other.transform.GetComponent<UnitControllerAPI>();
-            int otherFaction = otherUnit.FACTION;
+            otherFaction = otherUnit.FACTION;
             if(faction != otherFaction){
                 controller.AddTarget(otherUnit);
+            }
+        }
+        if(otherTag.Equals("Building")){
+            Building otherBuilding = other.transform.GetComponent<Building>();
+            otherFaction = otherBuilding.FACTION;
+            if(faction != otherFaction){
+                controller.AddTarget(otherBuilding);
             }
         }
     }

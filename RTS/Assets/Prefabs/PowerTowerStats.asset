@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PowerTowerStats
   m_EditorClassIdentifier: 
   BuildCost: 25
-  MaxHP: 25
+  MaxHP: 500
   EnergyConsumption: 5
   EnergyProduction: 0
