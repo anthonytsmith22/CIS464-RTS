@@ -17,7 +17,7 @@ public class FactoryScript : MonoBehaviour
     float productionTimer = 0.0f;
 
     private void Awake(){
-        building.GetComponent<Building>();
+        building = GetComponent<Building>();
         faction = building.FACTION;
     }
 
