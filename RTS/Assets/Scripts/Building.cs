@@ -45,6 +45,11 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (FACTION > 0)
+        {
+            var sprite = GetComponent<SpriteRenderer>();
+            sprite.color = new Color(0.4f, 1.0f, 1.0f, 1.0f);
+        }
         HP = Stats.MaxHP;
         Dead = false;
         Selected = false;

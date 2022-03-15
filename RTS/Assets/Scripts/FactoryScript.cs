@@ -24,7 +24,7 @@ public class FactoryScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PowerManager = transform.parent.Find("PowerManager").GetComponent<PowerManagement>();
+        PowerManager = transform.parent.GetComponent<PowerManagement>();
     }
 
     // Update is called once per frame

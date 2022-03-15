@@ -14,8 +14,11 @@ public class BuildingController : MonoBehaviour
         get => buildMode; 
         set 
         {
-            buildGhost.SetActive(value);
-            buildOutline.SetActive(value);
+            if (FACTION == 0)
+            {
+                buildGhost.SetActive(value);
+                buildOutline.SetActive(value);
+            }
             buildMode = value;
         } 
     }
@@ -105,6 +108,26 @@ public class BuildingController : MonoBehaviour
         BuildMode = true;
     }
 
+    public bool SpawnBuilding(Vector3 position, GameObject prefab)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 0.1f, LayerMask.GetMask("Building"));
+        if (hit.transform == null)
+        {       
+            var newBuilding = Instantiate(prefab, position, Quaternion.identity);
+            newBuilding.transform.parent = transform;
+            Building building = newBuilding.GetComponent<Building>();
+            building.FACTION = FACTION;
+            buildings.Add(newBuilding); 
+            return true;
+        }
+        else
+        {
+            Debug.Log("Collision");
+            return false;
+            // play sound
+        }
+    }
+
     void buildingPlacement(Vector3 gridSnappedPos)
     {
         buildGhost.transform.position = gridSnappedPos;
@@ -121,22 +144,11 @@ public class BuildingController : MonoBehaviour
         {
             Vector3 position = gridSnappedPos;
             filter.useDepth = true;
-            if (ghostCollider.OverlapCollider(filter, overlapped) == 0)
+            if (SpawnBuilding(position, newBuildingPrefab))
             {
-                var newBuilding = Instantiate(newBuildingPrefab, position, Quaternion.identity);
-                newBuilding.transform.parent = transform.parent;
-                Building building = newBuilding.GetComponent<Building>();
-                building.FACTION = FACTION;
-                buildings.Add(newBuilding);
                 BuildMode = false;
                 newBuildingPrefab = null;
             }
-            else
-            {
-                Debug.Log("Collision");
-                // play sound
-            }
-
         }
     }
 

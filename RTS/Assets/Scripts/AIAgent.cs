@@ -5,10 +5,15 @@ using UnityEngine;
 public class AIAgent : Player
 {
     // An individual AI player
-    private Player playerController;
-    private List<Player> otherFactions; 
+    public Player playerController;
+    private List<Player> otherFactions = new List<Player>(); 
     private List<FactoryScript> Factories = new List<FactoryScript>();
-    enum CurrentState
+
+    public List<GameObject> BuildingPrefabs;
+
+    private float buildTimer = 0f;
+
+    public enum CurrentState
     {
         GrowPower,
         GrowArmy,
@@ -16,16 +21,17 @@ public class AIAgent : Player
         Defending
     };
 
-    CurrentState State;
+    public CurrentState State;
     Player CurrentTarget = null;
 
     private void Awake(){
-        otherFactions.Add(playerController);
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        otherFactions.Add(playerController);
         State = CurrentState.GrowPower;
     }
 
@@ -35,29 +41,37 @@ public class AIAgent : Player
         
 
         // Determine who to attack
-        foreach (Player otherFaction in otherFactions)
-        {
-            float threat = calcThreatLevel(otherFaction);
-            if (threat > 1000.0f)
-            {
-                State = CurrentState.Attacking;
-                CurrentTarget = otherFaction;
-            }
+        // foreach (Player otherFaction in otherFactions)
+        // {
+        //     float threat = calcThreatLevel(otherFaction);
+        //     if (threat > 1000.0f)
+        //     {
+        //         State = CurrentState.Attacking;
+        //         CurrentTarget = otherFaction;
+        //     }
 
-        }
+        // }
 
         // no point in attacking if the army is way too small, 1.5x buffer zone since the AI won't be nearly as intelligent as the player at unit manipulation
-        if (GetNumDrones() < playerController.GetNumDrones() * 1.5f)
+        // if (GetNumDrones() < playerController.GetNumDrones() * 1.5f)
+        // {
+        //     State = CurrentState.GrowArmy;
+        // }
+
+        buildTimer += Time.deltaTime;
+
+        // power takes priority over units
+        if (PowerManagement.consumption == 0.0f)
         {
             State = CurrentState.GrowArmy;
         }
-
-        
-
-        // power takes priority over units
-        if (PowerManagement.Satisfaction < 1.0f)
+        else if (PowerManagement.Satisfaction < 1.0f)
         {
             State = CurrentState.GrowPower;
+        }
+        else
+        {
+            State = CurrentState.GrowArmy;
         }
 
         
@@ -81,17 +95,34 @@ public class AIAgent : Player
         
     }
 
+    void createBuilding(int id)
+    {
+        if (buildTimer > 15)
+        {
+            buildTimer = 0f;
+            Vector3 position = Vector3.zero;
+
+            const float range = 10f; 
+
+            position.x = Mathf.Floor(Random.Range(-range, range));
+            position.y = Mathf.Floor(Random.Range(-range, range));
+
+
+            BuildingController.SpawnBuilding(transform.position + position, BuildingPrefabs[id]);
+        }
+    }
+
     void growPower()
     {
         // call upon BuildController to make new Power Plants and Power Towers
-
+        createBuilding(1);
     }
 
     void growArmy()
     {
         // call upon BuildController to make new Factories
         // createFactories();
-        Vector3 newFactoryPosition;
+        createBuilding(0);
         // queueUnits();
     }
 

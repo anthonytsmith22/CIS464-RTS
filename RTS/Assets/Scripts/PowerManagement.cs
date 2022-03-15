@@ -39,12 +39,15 @@ public class PowerManagement : MonoBehaviour
             consumption += buildComponent.Stats.EnergyConsumption;            
         }
 
-        PowerText.text = $"Power: {production} / {consumption} MW";
+        if (FACTION == 0)
+        {
+            PowerText.text = $"Power: {production} / {consumption} MW";
 
-        if (consumption != 0)
-            PowerBar.value = Mathf.Min(production / consumption, 1.0f);
-        else
-            PowerBar.value = 0;
+            if (consumption != 0)
+                PowerBar.value = Mathf.Min(production / consumption, 1.0f);
+            else
+                PowerBar.value = 0;
+        }
     }
 
     

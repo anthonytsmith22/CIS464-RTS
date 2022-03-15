@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public static Player HumanPlayer;
+
     public string username;
     public float powerReserve;
     public int keysCollected;
@@ -20,11 +23,16 @@ public class Player : MonoBehaviour
     public List<KeyDroneController> keyDrones = new List<KeyDroneController>();
     
     
+    void Awake()
+    {
+        if (FACTION == 0)
+            HumanPlayer = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         BuildingController build = new BuildingController();
-        
     }
 
     // Update is called once per frame
