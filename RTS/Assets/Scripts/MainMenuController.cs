@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+
+    public GameObject Tutorial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,16 @@ public class MainMenuController : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("Anthony's Scene");
+    }
+    
+    public void ShowTutorial()
+    {
+        Tutorial.SetActive(true);
+    }
+
+    public void HideTutorial()
+    {
+        Tutorial.SetActive(false);
     }
 
     public void QuitGame()
