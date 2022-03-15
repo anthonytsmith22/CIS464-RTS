@@ -108,12 +108,25 @@ public class BuildingController : MonoBehaviour
         BuildMode = true;
     }
 
+    int factoryType = 0;
     public bool SpawnBuilding(Vector3 position, GameObject prefab)
     {
+        
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 0.1f, LayerMask.GetMask("Building"));
         if (hit.transform == null)
         {       
             var newBuilding = Instantiate(prefab, position, Quaternion.identity);
+            if(prefab.name.Equals("Factory")){
+                Player controller = GetComponent<Player>();
+                factoryType = controller.UnitTypeIndex;
+                if(factoryType == 4){
+                    factoryType = 0;
+                    controller.UnitTypeIndex = 0;
+                }
+                FactoryScript factory = newBuilding.GetComponent<FactoryScript>();
+                factory.TargetUnit = factoryType;
+                controller.UnitTypeIndex++;
+            }
             newBuilding.transform.parent = transform;
             Building building = newBuilding.GetComponent<Building>();
             building.FACTION = FACTION;

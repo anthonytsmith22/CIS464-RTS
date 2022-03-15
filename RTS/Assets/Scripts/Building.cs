@@ -27,7 +27,7 @@ public class Building : MonoBehaviour
         get => selected; 
         set
         {
-            BuildingUI.SetActive(value);
+            //BuildingUI.SetActive(value);
             selected = value;
             if (value)
                 OnSelected.Invoke();

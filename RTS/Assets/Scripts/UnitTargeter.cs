@@ -27,6 +27,7 @@ public class UnitTargeter : MonoBehaviour
             }
         }
         if(otherTag.Equals("Building")){
+            Debug.Log("Check building");
             Building otherBuilding = other.transform.GetComponent<Building>();
             otherFaction = otherBuilding.FACTION;
             if(faction != otherFaction){

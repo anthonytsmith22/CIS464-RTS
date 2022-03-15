@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FactoryScript : MonoBehaviour
 {
-    int faction;
+    public int faction;
     public GameObject[] UnitPrefabs;
 
     public PowerManagement PowerManager;
@@ -17,14 +17,15 @@ public class FactoryScript : MonoBehaviour
     float productionTimer = 0.0f;
 
     private void Awake(){
-        building = GetComponent<Building>();
-        faction = building.FACTION;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
         PowerManager = transform.parent.GetComponent<PowerManagement>();
+        building = GetComponent<Building>();
+        faction = building.FACTION;
     }
 
     // Update is called once per frame

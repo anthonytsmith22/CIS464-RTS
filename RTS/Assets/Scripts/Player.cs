@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     public static Player HumanPlayer;
 
+    public int UnitTypeIndex = 0;
     public string username;
     public float powerReserve;
     public int keysCollected;

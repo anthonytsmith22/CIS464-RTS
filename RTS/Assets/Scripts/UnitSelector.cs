@@ -110,10 +110,10 @@ public class UnitSelector : MonoBehaviour
                 UnitSelectEnter();
             }
             Debug.Log("Building");
-            UIManager.Instance.OpenFactoryUI();
+            //UIManager.Instance.OpenFactoryUI();
         }else{
             ClearSelectedUnits();
-            UIManager.Instance.CloseFactoryUI();
+            //UIManager.Instance.CloseFactoryUI();
         }
     }
 

@@ -97,7 +97,7 @@ public class AIAgent : Player
 
     void createBuilding(int id)
     {
-        if (buildTimer > 15)
+        if (buildTimer > 5)
         {
             buildTimer = 0f;
             Vector3 position = Vector3.zero;
