@@ -245,7 +245,7 @@ public class UnitControllerAPI : MonoBehaviour
                 Building building = hit.transform.GetComponent<Building>(); // Get building controller
                 int faction = building.FACTION;  // get faction
                 if(faction != FACTION){ // if building is not from this faction, damage it
-                    building.HP -= (int)hitScanDamage;
+                    building.TakeDamage(hitScanDamage);
                 }
             }else if(hit.transform.tag.Equals("Unit")){
                 UnitControllerAPI unitController = hit.transform.GetComponent<UnitControllerAPI>();

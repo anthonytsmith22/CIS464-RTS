@@ -6,7 +6,7 @@ public class FactoryScript : MonoBehaviour
 {
     public int faction;
     public GameObject[] UnitPrefabs;
-
+    public Player Controller;
     public PowerManagement PowerManager;
     public GameObject FactoryUI;
     private Building building;
@@ -26,6 +26,8 @@ public class FactoryScript : MonoBehaviour
         PowerManager = transform.parent.GetComponent<PowerManagement>();
         building = GetComponent<Building>();
         faction = building.FACTION;
+        Controller = transform.parent.GetComponent<Player>();
+        transform.parent = null;
     }
 
     // Update is called once per frame
@@ -36,11 +38,24 @@ public class FactoryScript : MonoBehaviour
         productionTimer += Time.deltaTime * PowerManager.Satisfaction;
         if (productionTimer >= productionTime)
         {
-            var unit = Instantiate(productionTarget, transform.position, transform.rotation);
+            productionTimer = 0.0f;
+            GameObject unit = Instantiate(productionTarget, transform.position, transform.rotation);
             UnitControllerAPI unitController = unit.GetComponent<UnitControllerAPI>();
             unitController.FACTION = faction;
-            unit.transform.parent = transform.parent;
-            productionTimer = 0.0f;
+            unit.transform.parent = null;
+            string unitName = unitController.unitName;
+            if(unitName.Equals("KeyDrone")){
+                Controller.keyDrones.Add(unitController);
+            }
+            else if(unitName.Equals("FastDrone")){
+                Controller.fastDrones.Add(unitController);
+            }
+            else if(unitName.Equals("MediumDrone")){
+                Controller.mediumDrones.Add(unitController);
+            }
+            else if(unitName.Equals("HeavyDrone")){
+                Controller.heavyDrones.Add(unitController);
+            }   
         }
 
     }

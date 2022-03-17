@@ -34,15 +34,16 @@ public class Building : MonoBehaviour
         } 
     }
 
-    int hp;
-    public int HP { get => hp; set {
-        hp = value;
-        HPBar.value = ((float)hp / Stats.MaxHP);
-        if (hp < 0)
-            explode();
-    } }
+    // int hp;
+    // public int HP { get => hp; set {
+    //     hp = value;
+    //     HPBar.value = ((float)hp / Stats.MaxHP);
+    //     if (hp < 0)
+    //         explode();
+    // } }
 
     // Start is called before the first frame update
+    public float CurrentHealth;
     void Start()
     {
         if (FACTION > 0)
@@ -50,7 +51,7 @@ public class Building : MonoBehaviour
             var sprite = GetComponent<SpriteRenderer>();
             sprite.color = new Color(0.4f, 1.0f, 1.0f, 1.0f);
         }
-        HP = Stats.MaxHP;
+        CurrentHealth = Stats.MaxHP;
         Dead = false;
         Selected = false;
     }
@@ -65,5 +66,14 @@ public class Building : MonoBehaviour
     {
         Dead = true;
         explodeSfx.Play();
+    }
+
+    public void TakeDamage(float damage){ // Damage logic for unit
+        CurrentHealth -= damage;
+        GetComponent<BuildingHealth>().DoDamage(damage); 
+        if(CurrentHealth < 0f){
+            CurrentHealth = 0f;
+            
+        }
     }
 }

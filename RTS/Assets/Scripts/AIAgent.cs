@@ -25,7 +25,7 @@ public class AIAgent : Player
     Player CurrentTarget = null;
 
     private void Awake(){
-        
+        playerController = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Start is called before the first frame update
@@ -36,6 +36,8 @@ public class AIAgent : Player
     }
 
     // Update is called once per frame
+    float retargetWaitTime = 15f;
+    float retargetTime = 0f;
     void Update()
     {
         
@@ -49,14 +51,32 @@ public class AIAgent : Player
         //         State = CurrentState.Attacking;
         //         CurrentTarget = otherFaction;
         //     }
-
+        //     threatRating
         // }
+        bool isAttacking;
+        threatRating = calcThreatLevel(playerController);
+        if(threatRating > 10000.0f){
+            State = CurrentState.Attacking;
+            CurrentTarget = playerController;
+            isAttacking = true;
+        }else{
+            isAttacking = false;
+        }
+
+        if(isAttacking){
+            retargetTime += Time.deltaTime;
+            if(retargetTime >= retargetWaitTime){
+                attack();
+            }
+        }else{
+            retargetTime = 0.0f;
+        }
 
         // no point in attacking if the army is way too small, 1.5x buffer zone since the AI won't be nearly as intelligent as the player at unit manipulation
-        // if (GetNumDrones() < playerController.GetNumDrones() * 1.5f)
-        // {
-        //     State = CurrentState.GrowArmy;
-        // }
+        if (GetNumDrones() < playerController.GetNumDrones() * 1.5f && playerController.GetNumDrones() != 0)
+        {
+            State = CurrentState.GrowArmy;
+        }
 
         buildTimer += Time.deltaTime;
 
@@ -135,6 +155,15 @@ public class AIAgent : Player
             }
 
         */
+        foreach(UnitControllerAPI unit in fastDrones){
+            unit.SetPositionTarget(playerController.transform.position);
+        }
+        foreach(UnitControllerAPI unit in mediumDrones){
+            unit.SetPositionTarget(playerController.transform.position);
+        }
+        foreach(UnitControllerAPI unit in heavyDrones){
+            unit.SetPositionTarget(playerController.transform.position);
+        }
     }
 
     void defend()

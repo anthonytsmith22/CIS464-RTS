@@ -232,7 +232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464333585
 GameObject:
@@ -761,7 +761,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3236115353257967411, guid: 7d78f22058b308045a8ad3af36378b9e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3236115353257967411, guid: 7d78f22058b308045a8ad3af36378b9e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13821,7 +13821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4629111103343262623, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4629111103343262623, guid: 2c11857735fa3a0439eb9b586ca61c44, type: 3}
       propertyPath: m_AnchorMax.x
@@ -14016,7 +14016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad1726b82287ff41bc8ba7854c0a2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numFactions: 0
   FactionPrefab: {fileID: 5065970239578277699, guid: ce0de140bdd82504e8baa5f543a94602, type: 3}
   FactionSpawnPoints:
   - {fileID: 1694096044}
@@ -14040,7 +14039,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2116161762
 GameObject:
@@ -14132,15 +14131,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 429747723863155865, guid: d9f7627f89af6db48b30391da424d416, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 429747723863155865, guid: d9f7627f89af6db48b30391da424d416, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14
+      value: -22.33
       objectReference: {fileID: 0}
     - target: {fileID: 429747723863155865, guid: d9f7627f89af6db48b30391da424d416, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12
+      value: -15.94
       objectReference: {fileID: 0}
     - target: {fileID: 429747723863155865, guid: d9f7627f89af6db48b30391da424d416, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14957,7 +14956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8917979166687195011, guid: 497bf4ee44d12f44cbe71a1e7623c073, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8917979166687195011, guid: 497bf4ee44d12f44cbe71a1e7623c073, type: 3}
       propertyPath: m_LocalScale.x

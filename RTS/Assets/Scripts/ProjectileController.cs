@@ -68,7 +68,7 @@ public class ProjectileController : MonoBehaviour
             if(otherBuilding.FACTION == faction){
                 return;
             }
-            otherBuilding.HP -= (int)projectileDamage;
+            DoDamage(otherBuilding);
             return;
         }
         else if(otherTag.Equals("Environment")){
@@ -83,6 +83,11 @@ public class ProjectileController : MonoBehaviour
     public virtual void DoDamage(UnitControllerAPI unitController){ // Do damage to hit drone
         // Expand/override to add particle effects or AOE
         unitController.TakeDamage(projectileDamage);
+        Destroy(gameObject);
+    }
+
+    public virtual void DoDamage(Building building){
+        building.TakeDamage(projectileDamage);
         Destroy(gameObject);
     }
 

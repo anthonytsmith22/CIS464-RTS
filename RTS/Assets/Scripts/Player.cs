@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public List<UnitControllerAPI> fastDrones = new List<UnitControllerAPI>();
     public List<UnitControllerAPI> mediumDrones = new List<UnitControllerAPI>();
     public List<UnitControllerAPI> heavyDrones = new List<UnitControllerAPI>();
-    public List<KeyDroneController> keyDrones = new List<KeyDroneController>();
+    public List<UnitControllerAPI> keyDrones = new List<UnitControllerAPI>();
     
     
     void Awake()

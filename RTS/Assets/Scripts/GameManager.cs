@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] int numFactions; 
+    int numFactions = 1; 
     private void Start(){
 
     }

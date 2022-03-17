@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77996f88dd5142c44909232c616d9b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitTypeIndex: 0
   username: 
   powerReserve: 0
   keysCollected: 0
@@ -92,4 +93,8 @@ MonoBehaviour:
   mediumDrones: []
   heavyDrones: []
   keyDrones: []
-  BuildingPrefabs: []
+  playerController: {fileID: 0}
+  BuildingPrefabs:
+  - {fileID: 1561587816007339829, guid: 54ad72f57968b864d90b4e0975d36ff6, type: 3}
+  - {fileID: 3314619262873261835, guid: 6a0d67119d20a114880ddcb3b3f622e7, type: 3}
+  State: 0

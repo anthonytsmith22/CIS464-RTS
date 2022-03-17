@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e6f583eea3b094790a2cb0ebeda5db, type: 3}
   m_Name: FastDroneLvl1
   m_EditorClassIdentifier: 
-  prefabName: Fast Drone Lvl 1
+  prefabName: FastDrone
   health: 100
   healthRegen: 0
   healthRegenRate: 0
