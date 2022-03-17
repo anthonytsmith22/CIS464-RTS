@@ -11,7 +11,7 @@ public class KeyTargeter : MonoBehaviour
 
     private void Awake(){
         range = GetComponent<CircleCollider2D>();
-        range.radius = 5f;
+        range.radius = 1.5f;
         range.isTrigger = true;
     }
 

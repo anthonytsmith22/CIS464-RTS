@@ -6,7 +6,8 @@ public class KeyDroneController : UnitControllerAPI
 {
     [SerializeField] private GameObject KeyHolder; // Child gameObject where key will be placed
     [SerializeField] private KeyCollector collector;
-    public bool HasKey { get; private set; }
+    Key keyTarget;
+    public bool HasKey;
     public override void Awake()
     {
         base.Awake();

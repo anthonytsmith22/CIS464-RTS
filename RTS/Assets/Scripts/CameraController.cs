@@ -6,18 +6,23 @@ public class CameraController : MonoBehaviour
 {
     private float minX, maxX, minY, maxY;
     Transform Map;
-    [SerializeField] Transform FreeLockCameraPoint;
+    [SerializeField] Transform FreeLookCameraPoint;
+    [SerializeField] Transform CameraStartPosition;
     [SerializeField] UnitSelector selector;
     List<Transform> SelectedUnits = new List<Transform>();
-    [SerializeField] float cameraMoveSpeed = 2f;
+    [SerializeField] float cameraMoveSpeed = 3f;
+    float minCameraMoveSpeed;
+    float maxCameraMoveSpeed;
     CinemachineVirtualCamera cmCam;
     [SerializeField] float startingOrthoSize = 5f;
-    [SerializeField] float minOrthoSize = 2f;
-    [SerializeField] float maxOrthoSize = 8f;
+    float minOrthoSize = 2f;
+    float maxOrthoSize = 16;
     private float currentOrthoSize;
     
     private void Awake(){
         cmCam = GetComponent<CinemachineVirtualCamera>();
+        minCameraMoveSpeed = cameraMoveSpeed;
+        maxCameraMoveSpeed = cameraMoveSpeed * 5f;
     }
     private void Start(){
         SetupClamp();
@@ -25,6 +30,7 @@ public class CameraController : MonoBehaviour
         selector.OnUnitSelectEnter += GetSelectedUnitsViewPosition;
         cmCam.m_Lens.OrthographicSize = startingOrthoSize;
         currentOrthoSize = startingOrthoSize;
+        FreeLookCameraPoint.position = CameraStartPosition.position;
     }
 
     private void Update(){
@@ -33,9 +39,15 @@ public class CameraController : MonoBehaviour
     }
 
     private void ResizeCamera(){
-        float scrollDelta = Input.mouseScrollDelta.y * 0.5f;
-        currentOrthoSize -= scrollDelta;
+        float scrollDelta = Input.mouseScrollDelta.y;
+        float scrollChange = scrollDelta * 0.5f;
+        currentOrthoSize -= scrollChange;
         currentOrthoSize = Mathf.Clamp(currentOrthoSize, minOrthoSize, maxOrthoSize);
+
+        // Get camera move speed
+        float orthoRatio = currentOrthoSize / (maxOrthoSize - minOrthoSize);
+        cameraMoveSpeed = (maxCameraMoveSpeed - minCameraMoveSpeed) * orthoRatio + minCameraMoveSpeed;
+        cameraMoveSpeed = Mathf.Clamp(cameraMoveSpeed, minCameraMoveSpeed, maxCameraMoveSpeed); 
         cmCam.m_Lens.OrthographicSize = currentOrthoSize;
     }
 
@@ -44,9 +56,9 @@ public class CameraController : MonoBehaviour
         float vertical = InputListener.Instance.vertical;
 
         Vector3 moveCam = new Vector3(horizontal, vertical);
-        Vector3 camPosition = FreeLockCameraPoint.position + moveCam * cameraMoveSpeed * Time.deltaTime;
+        Vector3 camPosition = FreeLookCameraPoint.position + moveCam * cameraMoveSpeed * Time.deltaTime;
         camPosition = ClampPosition(camPosition);
-        FreeLockCameraPoint.position = camPosition;
+        FreeLookCameraPoint.position = camPosition;
     }
 
     private void GetSelectedUnits(){
@@ -61,7 +73,7 @@ public class CameraController : MonoBehaviour
             avgPosition += SelectedUnits[i].position;
         }
         Vector3 centerPosition = new Vector3(avgPosition.x / numUnits, avgPosition.y / numUnits, 0f);
-        FreeLockCameraPoint.position = centerPosition;
+        FreeLookCameraPoint.position = centerPosition;
         ClampPosition();
     }
 
@@ -82,7 +94,7 @@ public class CameraController : MonoBehaviour
     }
 
     private void ClampPosition(){
-        Vector3 position = FreeLockCameraPoint.position;
+        Vector3 position = FreeLookCameraPoint.position;
         position.x = Mathf.Clamp(position.x, minX, maxX);
         position.y = Mathf.Clamp(position.y, minY, maxY);
     }

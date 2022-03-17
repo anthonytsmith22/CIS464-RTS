@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BuildingController build = new BuildingController();
+        //BuildingController build = new BuildingController();
     }
 
     // Update is called once per frame

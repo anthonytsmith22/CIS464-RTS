@@ -24,4 +24,4 @@ MonoBehaviour:
   hitScanDamage: 0
   scale: 1
   level: 1
-  range: 4
+  range: 6

@@ -28,15 +28,21 @@ public class KeyCollector : MonoBehaviour
             }
             // ELSE pickup the key
             if(HeldKey == null){ // Check if drone owns a key already
-                // Parent key to drone
-                HeldKey = key;
-                key.owned = true;
-                key.transform.SetParent(transform);
-                // disable key meshrender
-                //key.GetComponent<SpriteRenderer>().enabled = false;
-                keyDroneController.movementSpeed /= 2.5f;
+                PickupKey(key);
             }
         }
+    }
+
+    private void PickupKey(Key key){
+        // Parent key to drone
+        HeldKey = key;
+        key.owned = true;
+        key.transform.SetParent(transform);
+        keyDroneController.HasKey = true;
+        // disable key meshrender
+        //key.GetComponent<SpriteRenderer>().enabled = false;
+        keyDroneController.movementSpeed /= 2.5f;
+        KeyGate.Instance.OnKeyHeldStatusChanged();
     }
 
     private void OnDestroy(){
@@ -48,6 +54,7 @@ public class KeyCollector : MonoBehaviour
             HeldKey.GetComponent<Key>().owned = false;
             //HeldKey.GetComponent<SpriteRenderer>().enabled = true;
             HeldKey = null;
+            KeyGate.Instance.OnKeyHeldStatusChanged();
         }
     }
 }
