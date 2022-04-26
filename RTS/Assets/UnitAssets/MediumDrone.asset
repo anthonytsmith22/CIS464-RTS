@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 200
   healthRegen: 0
   healthRegenRate: 0
-  movementSpeed: 15
+  movementSpeed: 3.5
   canAttack: 1
   attackSpeed: 20
   isProjectile: 1
