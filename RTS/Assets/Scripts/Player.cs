@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Player : MonoBehaviour
 {
 
     public static Player HumanPlayer;
-
+    public bool IsPlayer = true;
+    public int BuildingCount = 0;
     public int UnitTypeIndex = 0;
     public string username;
     public float powerReserve;
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         FACTION = faction;
         PowerManagement.FACTION = faction;
         BuildingController.FACTION = faction;
+        BuildingController.player = this;
     }
 
     public virtual int GetNumDrones(){
@@ -69,5 +71,14 @@ public class Player : MonoBehaviour
                 return keyDrones.Count;     
         }
         return 0;
+    }
+
+    public void IncreaseBuildingCount(){
+        BuildingCount++;
+    }
+
+    public void OnBuildingDestroyed(){
+        BuildingCount--;
+        GameManager.Instance.CheckBuildingCount(this);
     }
 }

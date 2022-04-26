@@ -10,7 +10,7 @@ public class Building : MonoBehaviour
     public BuildingStats Stats;
     public Slider HPBar;
     public GameObject BuildingUI;
-
+    public Player player;
     public UnityEvent OnSelected;
     private AudioSource explodeSfx;
 
@@ -75,5 +75,9 @@ public class Building : MonoBehaviour
             CurrentHealth = 0f;
             
         }
+    }
+
+    void OnDestroy(){
+        player.OnBuildingDestroyed();
     }
 }

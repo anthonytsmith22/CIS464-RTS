@@ -28,20 +28,22 @@ public class GameManager : MonoBehaviour
     private void Start(){
 
     }
+    AIAgent EnemyFaction;
+    Player ThePlayer;
 
     [SerializeField] GameObject FactionPrefab;
     [SerializeField] List<Transform> FactionSpawnPoints;
     [SerializeField] GameObject PlayerPrefab;
     private void InitializeFactions(){
         GameObject player = Instantiate(PlayerPrefab, FactionSpawnPoints[0].position, Quaternion.identity);
-        Player playerController = player.GetComponent<Player>();
-        playerController.Setup(0);
+        ThePlayer = player.GetComponent<Player>();
+        ThePlayer.Setup(0);
 
         GameObject faction;
         for(int i = 0; i < numFactions; i++){
             faction = Instantiate(FactionPrefab, FactionSpawnPoints[i+1].position, Quaternion.identity);
-            AIAgent factionAgent = faction.GetComponent<AIAgent>();
-            factionAgent.Setup(i+1);
+            EnemyFaction = faction.GetComponent<AIAgent>();
+            EnemyFaction.Setup(i+1);
         }
     }
 
@@ -77,9 +79,26 @@ public class GameManager : MonoBehaviour
 
     public void WIN(){
         Debug.Log("PLAYER WON");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
     }
 
     public void LOSE(){
         Debug.Log("PLAYER LOST");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
+    }
+
+    public void CheckBuildingCount(Player player){
+        int buildingCount = player.BuildingCount;
+        if(buildingCount == 0 && player.IsPlayer){
+            LOSE();
+        }else if(buildingCount == 0 && !player.IsPlayer){
+            WIN();
+        }
     }
 }
