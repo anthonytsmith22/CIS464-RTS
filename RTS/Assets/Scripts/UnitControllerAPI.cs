@@ -31,6 +31,9 @@ public class UnitControllerAPI : MonoBehaviour
     public UnitControllerAPI UnitTarget;
     public Transform UnitTargetTransform;
 
+    public AudioSource Audio;
+    public AudioClip ShootSfx;
+
     // Unit's current position/location target
     public Vector3 PositionTarget;
 
@@ -81,6 +84,7 @@ public class UnitControllerAPI : MonoBehaviour
         // rb.gravityScale = 0f;   // RB doesn't use gravity
 
         // Setup other attributes such as CurrentHealth
+        Audio.clip = ShootSfx;
         Setup();
     }
 
@@ -219,6 +223,7 @@ public class UnitControllerAPI : MonoBehaviour
         }
         Transform firePoint = firePoints[firePointIndex];
         Vector3 fireDirection = UnitTargetTransform.position - firePoint.position; // Get direction to fire
+        Audio.Play();
         if(isProjectile){ // If attack is of type projectile
             ProjectileShoot(fireDirection, firePoint);
         }else{ // Is of type hit scan

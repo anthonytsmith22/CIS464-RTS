@@ -30,7 +30,7 @@ public class PowerManagement : MonoBehaviour
         production = 0;
         consumption = 0;
 
-        //buildingController.RemoveDead();
+        buildingController.RemoveDead();
 
         foreach (var building in buildingController.buildings)
         {
