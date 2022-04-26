@@ -43,6 +43,8 @@ public class FactoryScript : MonoBehaviour
             UnitControllerAPI unitController = unit.GetComponent<UnitControllerAPI>();
             unitController.FACTION = faction;
             unit.transform.parent = null;
+            Color factionColor = faction == 0 ? Color.white : new Color(1.0f, 0.6f, 0.6f, 1.0f);
+            unit.GetComponent<SpriteRenderer>().color = factionColor;
             string unitName = unitController.unitName;
             if(unitName.Equals("KeyDrone")){
                 Controller.keyDrones.Add(unitController);

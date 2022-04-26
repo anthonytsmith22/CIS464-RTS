@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1217005279849643458}
   - component: {fileID: 5139781022234780509}
   - component: {fileID: 2894109560268739045}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ground
   m_TagString: Map
   m_Icon: {fileID: 0}
@@ -56404,7 +56404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8917979166687195011}
   - component: {fileID: 4547105323230626486}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: MAP 1
   m_TagString: Map
   m_Icon: {fileID: 0}
@@ -56453,7 +56453,7 @@ GameObject:
   - component: {fileID: 2552797238039455880}
   - component: {fileID: 8945621433493921326}
   - component: {fileID: 8610587500559442234}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Barrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

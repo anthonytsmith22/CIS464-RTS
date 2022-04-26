@@ -30,11 +30,12 @@ public class PowerManagement : MonoBehaviour
         production = 0;
         consumption = 0;
 
-        buildingController.RemoveDead();
+        //buildingController.RemoveDead();
 
         foreach (var building in buildingController.buildings)
         {
             Building buildComponent = building.GetComponent<Building>();
+            if (buildComponent.Dead) continue;
             production += buildComponent.Stats.EnergyProduction;
             consumption += buildComponent.Stats.EnergyConsumption;            
         }

@@ -242,6 +242,8 @@ MonoBehaviour:
   Map: {fileID: 0}
   ProjectilePrefab: {fileID: 5293164678592072344, guid: 384a256d805d7e74d9f9f279e094e12c, type: 3}
   potentialTargets: []
+  potentialBuildingTargets: []
+  buildingTarget: {fileID: 0}
   unitHealthController: {fileID: 4956510267568366472}
   lineRenderer: {fileID: 0}
 --- !u!58 &5297015467960948909

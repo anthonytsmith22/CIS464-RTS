@@ -570,6 +570,8 @@ MonoBehaviour:
   Map: {fileID: 0}
   ProjectilePrefab: {fileID: 0}
   potentialTargets: []
+  potentialBuildingTargets: []
+  buildingTarget: {fileID: 0}
   unitHealthController: {fileID: 2912452687192524785}
   lineRenderer: {fileID: 7090007913634208691, guid: 193cb4cd106aa3d4eafa45b6ec163013, type: 3}
 --- !u!114 &2912452687192524785

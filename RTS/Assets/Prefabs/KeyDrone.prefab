@@ -194,10 +194,13 @@ MonoBehaviour:
   Map: {fileID: 0}
   ProjectilePrefab: {fileID: 0}
   potentialTargets: []
+  potentialBuildingTargets: []
+  buildingTarget: {fileID: 0}
   unitHealthController: {fileID: 7911805549317294753}
   lineRenderer: {fileID: 0}
   KeyHolder: {fileID: 0}
   collector: {fileID: 0}
+  HasKey: 0
 --- !u!1 &5847856388194826250
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform CameraStartPosition;
     [SerializeField] UnitSelector selector;
     List<Transform> SelectedUnits = new List<Transform>();
-    [SerializeField] float cameraMoveSpeed = 3f;
+    [SerializeField] float cameraMoveSpeed = 12f;
     float minCameraMoveSpeed;
     float maxCameraMoveSpeed;
     CinemachineVirtualCamera cmCam;

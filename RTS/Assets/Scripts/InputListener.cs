@@ -42,21 +42,24 @@ public class InputListener : MonoBehaviour
     public bool d;
 
     private void Update(){
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-        horizonalMouse = Input.GetAxisRaw("Mouse X");
-        verticalMouse = Input.GetAxisRaw("Mouse X");
-        menu = Input.GetKeyDown(interactKey);
-        interact = Input.GetKeyDown(interactKey);
-        primaryDown = Input.GetKeyDown(primaryKey);
-        primaryUp = Input.GetKeyUp(primaryKey);
-        secondaryDown = Input.GetKeyDown(secondaryKey);
-        leftShift = Input.GetKey(leftShiftKey);
+        if (!PauseMenu.paused)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            horizonalMouse = Input.GetAxisRaw("Mouse X");
+            verticalMouse = Input.GetAxisRaw("Mouse X");
+            menu = Input.GetKeyDown(interactKey);
+            interact = Input.GetKeyDown(interactKey);
+            primaryDown = Input.GetKeyDown(primaryKey);
+            primaryUp = Input.GetKeyUp(primaryKey);
+            secondaryDown = Input.GetKeyDown(secondaryKey);
+            leftShift = Input.GetKey(leftShiftKey);
 
-        w = Input.GetKey(KeyCode.W);
-        a = Input.GetKey(KeyCode.A);
-        s = Input.GetKey(KeyCode.S);
-        d = Input.GetKey(KeyCode.D);
+            w = Input.GetKey(KeyCode.W);
+            a = Input.GetKey(KeyCode.A);
+            s = Input.GetKey(KeyCode.S);
+            d = Input.GetKey(KeyCode.D);
+        }
     }
     
 }

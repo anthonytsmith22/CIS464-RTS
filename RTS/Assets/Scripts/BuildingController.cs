@@ -50,42 +50,43 @@ public class BuildingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Vector3 mousePosWorld = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePosWorld.z = 0;
-
-        Vector3 gridSnappedPos = new Vector3();
-        gridSnappedPos.x = Mathf.Floor(mousePosWorld.x);
-        gridSnappedPos.y = Mathf.Floor(mousePosWorld.y);
-        gridSnappedPos.z = 0;
-
-        if (BuildMode)
+        if (!PauseMenu.paused)
         {
-            if (Input.GetMouseButtonDown(1))
-                BuildMode = false;
-            buildingPlacement(gridSnappedPos);
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
+            Vector3 mousePosWorld = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            mousePosWorld.z = 0;
+
+            Vector3 gridSnappedPos = new Vector3();
+            gridSnappedPos.x = Mathf.Floor(mousePosWorld.x);
+            gridSnappedPos.y = Mathf.Floor(mousePosWorld.y);
+            gridSnappedPos.z = 0;
+
+            if (BuildMode)
             {
-
-                foreach (var b in buildings)
+                if (Input.GetMouseButtonDown(1))
+                    BuildMode = false;
+                buildingPlacement(gridSnappedPos);
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
-                    // deselect everything
-                    b.GetComponent<Building>().Selected = false;
 
-                    // if collision with mouse, select this building
-                    if (b.GetComponent<BoxCollider2D>().OverlapPoint(mousePosWorld))
+                    foreach (var b in buildings)
                     {
-                        Building building = b.GetComponent<Building>();
-                        building.Selected = true;
+                        // deselect everything
+                        b.GetComponent<Building>().Selected = false;
+
+                        // if collision with mouse, select this building
+                        if (b.GetComponent<BoxCollider2D>().OverlapPoint(mousePosWorld))
+                        {
+                            Building building = b.GetComponent<Building>();
+                            building.Selected = true;
+                        }
                     }
                 }
             }
-        }
 
-        
+        }
 
     }
 
@@ -113,7 +114,9 @@ public class BuildingController : MonoBehaviour
     {
         
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 0.1f, LayerMask.GetMask("Building"));
-        if (hit.transform == null)
+        RaycastHit2D hit2 = Physics2D.Raycast(position, Vector2.zero, 0.1f, LayerMask.GetMask("Water"));
+        Debug.Log(hit2.transform == null);
+        if (hit.transform == null && (hit2.transform != null))
         {       
             var newBuilding = Instantiate(prefab, position, Quaternion.identity);
             if(prefab.name.Equals("Factory")){

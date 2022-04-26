@@ -49,7 +49,7 @@ public class Building : MonoBehaviour
         if (FACTION > 0)
         {
             var sprite = GetComponent<SpriteRenderer>();
-            sprite.color = new Color(0.4f, 1.0f, 1.0f, 1.0f);
+            sprite.color = new Color(1.0f, 0.6f, 0.6f, 1.0f);
         }
         CurrentHealth = Stats.MaxHP;
         Dead = false;
