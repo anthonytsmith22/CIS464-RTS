@@ -95,9 +95,9 @@ public class GameManager : MonoBehaviour
 
     public void CheckBuildingCount(Player player){
         int buildingCount = player.BuildingCount;
-        if(buildingCount == 0 && player.IsPlayer){
+        if(buildingCount == 0 && !player.IsPlayer){
             LOSE();
-        }else if(buildingCount == 0 && !player.IsPlayer){
+        }else if(buildingCount == 0 && player.IsPlayer){
             WIN();
         }
     }
