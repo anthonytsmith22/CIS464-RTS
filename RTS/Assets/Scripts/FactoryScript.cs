@@ -40,6 +40,7 @@ public class FactoryScript : MonoBehaviour
         {
             productionTimer = 0.0f;
             GameObject unit = Instantiate(productionTarget, transform.position, transform.rotation);
+            unit.transform.parent = null;
             UnitControllerAPI unitController = unit.GetComponent<UnitControllerAPI>();
             unitController.FACTION = faction;
             unit.transform.parent = null;

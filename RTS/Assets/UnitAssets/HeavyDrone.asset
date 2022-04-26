@@ -19,9 +19,9 @@ MonoBehaviour:
   movementSpeed: 2
   canAttack: 1
   attackSpeed: 100
-  isProjectile: 0
-  projectile: {fileID: 0}
-  hitScanDamage: 10
+  isProjectile: 1
+  projectile: {fileID: 5293164678592072344, guid: 384a256d805d7e74d9f9f279e094e12c, type: 3}
+  hitScanDamage: 0
   scale: 1
   level: 1
   range: 6

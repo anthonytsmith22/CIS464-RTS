@@ -305,7 +305,7 @@ public class UnitControllerAPI : MonoBehaviour
     public virtual void ResetCombat(){ // Use when attack params change such as attack speed;
         DisengageCombat();
         if(UnitTarget == null){ // If unit target is null, check for new target in potentialTargets
-            if(potentialTargets.Count > 0){ // Check for viable target
+            if(potentialTargets.Count > 0 || potentialTargets[0] != null){ // Check for viable target
                 UnitTarget = potentialTargets[0];
                 SetUnitPositionTarget(UnitTarget.transform);
             }
