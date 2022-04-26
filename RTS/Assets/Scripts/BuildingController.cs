@@ -7,7 +7,7 @@ public class BuildingController : MonoBehaviour
 {
 
     public int FACTION;
-
+    public Player player;
     private bool buildMode;
     public float BuildTime = 5.0f;
     public float BuildTimer = 10.0f;
@@ -155,8 +155,10 @@ public class BuildingController : MonoBehaviour
             }
             newBuilding.transform.parent = transform;
             Building building = newBuilding.GetComponent<Building>();
+            building.player = player;
             building.FACTION = FACTION;
             buildings.Add(newBuilding); 
+            player.IncreaseBuildingCount();
             return true;
         }
         else

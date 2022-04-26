@@ -25,6 +25,7 @@ public class AIAgent : Player
     Player CurrentTarget = null;
 
     private void Awake(){
+        IsPlayer = false;
         playerController = GameObject.Find("Player").GetComponent<Player>();
     }
 
