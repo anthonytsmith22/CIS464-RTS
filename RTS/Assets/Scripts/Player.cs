@@ -47,7 +47,9 @@ public class Player : MonoBehaviour
         FACTION = faction;
         PowerManagement.FACTION = faction;
         BuildingController.FACTION = faction;
-        BuildingController.player = this;
+        if(!IsPlayer){
+            BuildingController.player = this;
+        }
     }
 
     public virtual int GetNumDrones(){
