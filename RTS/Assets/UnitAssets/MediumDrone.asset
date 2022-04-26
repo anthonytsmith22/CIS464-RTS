@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: MediumDrone
   m_EditorClassIdentifier: 
   prefabName: MediumDrone
-  health: 250
+  health: 200
   healthRegen: 0
   healthRegenRate: 0
-  movementSpeed: 130
+  movementSpeed: 15
   canAttack: 1
-  attackSpeed: 30
+  attackSpeed: 20
   isProjectile: 1
   projectile: {fileID: 1101228310142235202, guid: ac837c369b0fe8745bd8367d8de44010, type: 3}
   hitScanDamage: 0

@@ -9,11 +9,6 @@ public class ReconDroneController : UnitControllerAPI
         base.Awake();
     }
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     public override void EngageCombat()
     {
         return;

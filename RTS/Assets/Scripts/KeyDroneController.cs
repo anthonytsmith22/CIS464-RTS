@@ -17,11 +17,6 @@ public class KeyDroneController : UnitControllerAPI
         HasKey = false;
     }
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     public override void EngageCombat()
     {
         return;
