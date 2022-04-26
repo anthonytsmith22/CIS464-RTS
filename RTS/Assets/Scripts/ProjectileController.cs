@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileController : MonoBehaviour
 {
     // Necessary values from ScriptableObject ScriptableObject/ProjectileValues
@@ -21,25 +19,28 @@ public class ProjectileController : MonoBehaviour
     public int faction; // Faction that projectile was fired from
 
     private void Awake(){
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         ProjectileCollider = GetComponent<CircleCollider2D>();
 
         GetValues();
     }
 
+    Vector3 projectileMovement;
+
     private void Update(){
-        //transform.position += fireDirection * speed * Time.deltaTime;
+        transform.Translate(projectileMovement * Time.deltaTime, Space.World);
     }
 
     // Called in UnitControllerAPI when projectile is instantiated
     public virtual void Setup(Vector2 fireDirection, int faction){
         this.faction = faction;
         this.fireDirection = fireDirection;
-        Launch(fireDirection);
+        //Launch(fireDirection);
+        projectileMovement = fireDirection * speed;
     }
 
     public virtual void Launch(Vector2 fireDirection){ // Physics based approach to moving the projectile
-        rb.AddForce(fireDirection * force, forceMode);
+        //rb.AddForce(fireDirection * force, forceMode);
     }
 
     public virtual void GetValues(){ // Set object values to those in ScriptableObject

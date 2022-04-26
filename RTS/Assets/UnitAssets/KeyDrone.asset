@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: KeyDrone
   m_EditorClassIdentifier: 
   prefabName: KeyDrone
-  health: 150
+  health: 100
   healthRegen: 0
   healthRegenRate: 0
-  movementSpeed: 300
+  movementSpeed: 30
   canAttack: 1
   attackSpeed: 0
   isProjectile: 0

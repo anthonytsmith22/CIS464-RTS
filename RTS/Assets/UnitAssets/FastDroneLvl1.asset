@@ -16,9 +16,9 @@ MonoBehaviour:
   health: 100
   healthRegen: 0
   healthRegenRate: 0
-  movementSpeed: 200
+  movementSpeed: 20
   canAttack: 1
-  attackSpeed: 60
+  attackSpeed: 20
   isProjectile: 1
   projectile: {fileID: 5293164678592072344, guid: 384a256d805d7e74d9f9f279e094e12c, type: 3}
   hitScanDamage: 0
