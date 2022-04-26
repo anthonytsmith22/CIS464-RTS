@@ -9,6 +9,9 @@ public class BuildingController : MonoBehaviour
     public int FACTION;
     public Player player;
     private bool buildMode;
+    public float BuildTime = 5.0f;
+    public float BuildTimer = 10.0f;
+    public AudioClip Yes, No, Build, LowPower;
     public bool BuildMode 
     { 
         get => buildMode; 
@@ -52,6 +55,7 @@ public class BuildingController : MonoBehaviour
     {
         if (!PauseMenu.paused)
         {
+            BuildTimer += Time.deltaTime;
             Vector3 mousePosWorld = mainCam.ScreenToWorldPoint(Input.mousePosition);
             mousePosWorld.z = 0;
 
@@ -103,10 +107,23 @@ public class BuildingController : MonoBehaviour
 
     public void CreateBuilding(GameObject prefab)
     {
-        newBuildingPrefab = prefab;
-        ghostSprite.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
-        ghostSprite.sortingLayerName = "Building";
-        BuildMode = true;
+        var Audio = GetComponent<AudioSource>();
+        
+        if (BuildTimer > BuildTime)
+        {
+            newBuildingPrefab = prefab;
+            ghostSprite.sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+            ghostSprite.sortingLayerName = "Building";
+            BuildMode = true;
+            BuildTimer = 0;
+            Audio.clip = Yes;
+        }
+        else
+        {
+            Audio.clip = No;
+        }
+        if (FACTION == 0)
+            Audio.Play();
     }
 
     int factoryType = 0;
@@ -129,6 +146,12 @@ public class BuildingController : MonoBehaviour
                 FactoryScript factory = newBuilding.GetComponent<FactoryScript>();
                 factory.TargetUnit = factoryType;
                 controller.UnitTypeIndex++;
+            }
+            if (FACTION == 0)
+            {
+                var audio = GetComponent<AudioSource>();
+                audio.clip = Build;
+                audio.Play();
             }
             newBuilding.transform.parent = transform;
             Building building = newBuilding.GetComponent<Building>();
