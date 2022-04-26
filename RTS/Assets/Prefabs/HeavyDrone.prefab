@@ -416,7 +416,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5356175237842361139}
   - component: {fileID: 5466870484074061572}
-  - component: {fileID: 2327166541364476995}
   - component: {fileID: 2902008360768125984}
   - component: {fileID: 2912452687192524785}
   - component: {fileID: 567245869551013011}
@@ -497,27 +496,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2327166541364476995
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4549713194659776362}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &2902008360768125984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +548,8 @@ MonoBehaviour:
   Map: {fileID: 0}
   ProjectilePrefab: {fileID: 0}
   potentialTargets: []
+  potentialBuildingTargets: []
+  buildingTarget: {fileID: 0}
   unitHealthController: {fileID: 2912452687192524785}
   lineRenderer: {fileID: 7090007913634208691, guid: 193cb4cd106aa3d4eafa45b6ec163013, type: 3}
 --- !u!114 &2912452687192524785

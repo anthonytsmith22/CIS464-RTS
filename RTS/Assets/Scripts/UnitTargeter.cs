@@ -17,12 +17,15 @@ public class UnitTargeter : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other){
+        Debug.Log("Check trigger unit");
         int otherFaction;
         string otherTag = other.tag;
         if(otherTag.Equals("Unit")){
+            Debug.Log("Check Is Unit");
             UnitControllerAPI otherUnit = other.transform.GetComponent<UnitControllerAPI>();
             otherFaction = otherUnit.FACTION;
             if(faction != otherFaction){
+                Debug.Log("Is enemy");
                 controller.AddTarget(otherUnit);
             }
         }

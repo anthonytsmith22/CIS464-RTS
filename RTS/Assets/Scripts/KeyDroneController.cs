@@ -13,13 +13,9 @@ public class KeyDroneController : UnitControllerAPI
         base.Awake();
     }
 
-    private void Start(){
+    public override void Start(){
+        base.Start();
         HasKey = false;
-    }
-
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
     }
 
     public override void EngageCombat()

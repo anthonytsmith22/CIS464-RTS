@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class UnitControllerAPI : MonoBehaviour
 {
     // Necessary values from ScriptableObject ScriptableObject/UnitValues
@@ -77,9 +76,9 @@ public class UnitControllerAPI : MonoBehaviour
 
         unitCollider = GetComponent<CircleCollider2D>();
         unitVisual = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = true; // RB only responds to scripts
-        rb.gravityScale = 0f;   // RB doesn't use gravity
+        // rb = GetComponent<Rigidbody2D>();
+        // rb.isKinematic = true; // RB only responds to scripts
+        // rb.gravityScale = 0f;   // RB doesn't use gravity
 
         // Setup other attributes such as CurrentHealth
         Setup();
@@ -89,7 +88,7 @@ public class UnitControllerAPI : MonoBehaviour
         SetDefaultStartPosition();
     }
 
-    public virtual void FixedUpdate(){
+    public virtual void Update(){
         if(shouldMove){
             if(!moveAtUnit){
                 MoveUnit();
@@ -106,8 +105,14 @@ public class UnitControllerAPI : MonoBehaviour
         // Set visual
         //unitVisual.sprite = visual;
 
+        //DisableNestedColliderCollision();
         SetupClamp();
         LayerMaskSetup();
+    }
+
+    void DisableNestedColliderCollision(){
+        Collider2D rangeCollider = transform.Find("Range").gameObject.GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(unitCollider, rangeCollider);
     }
 
     public virtual void LayerMaskSetup(){
@@ -332,11 +337,13 @@ public class UnitControllerAPI : MonoBehaviour
         Vector3 differenceVector = PositionTarget - transform.position; // Get the difference between unit's current position and targetLocation
         if(differenceVector.magnitude <= positionMargin){ // Check if unit is at target position
             shouldMove = false; // If so, disable movement
-            rb.velocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
             return;
         }
-        Vector3 newVelocity = differenceVector.normalized * movementSpeed * Time.fixedDeltaTime;
-        rb.velocity = newVelocity;
+        // Vector3 newVelocity = differenceVector.normalized * movementSpeed * Time.fixedDeltaTime;
+        // rb.velocity = newVelocity;
+        Vector3 movement = differenceVector.normalized * movementSpeed * Time.deltaTime;
+        transform.Translate(movement, Space.World);
         ClampPosition();
     }
 
@@ -348,11 +355,13 @@ public class UnitControllerAPI : MonoBehaviour
             shouldMove = true;
         }else{
             shouldMove = false;
-            rb.velocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
             return;
         }
-        Vector3 newVelocity = differenceVector.normalized * movementSpeed * Time.fixedDeltaTime;
-        rb.velocity = newVelocity;
+        // Vector3 newVelocity = differenceVector.normalized * movementSpeed * Time.fixedDeltaTime;
+        // rb.velocity = newVelocity;
+        Vector3 movement = differenceVector.normalized * movementSpeed * Time.deltaTime;
+        transform.Translate(movement, Space.World);
         ClampPosition();
     }
 
