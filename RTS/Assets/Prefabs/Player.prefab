@@ -90,6 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad876c7b5bc675e4ab65f2c667119918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayer: 1
+  BuildingCount: 0
   UnitTypeIndex: 0
   username: 
   powerReserve: 0
@@ -135,11 +137,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FACTION: 0
+  player: {fileID: 429747723863155871}
   BuildTime: 5
   BuildTimer: 0
   Yes: {fileID: 8300000, guid: 6a9194a3d2951e043beee35eb45eeaba, type: 3}
   No: {fileID: 8300000, guid: 0eaa0e28ac740774284084952af1af79, type: 3}
   Build: {fileID: 8300000, guid: cc15328e4b9763842821aeaa374764f1, type: 3}
+  LowPower: {fileID: 0}
   CameraPanSpeed: 0
   buildOutline: {fileID: 0}
   buildings: []
