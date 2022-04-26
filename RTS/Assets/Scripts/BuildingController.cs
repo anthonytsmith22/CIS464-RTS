@@ -10,7 +10,7 @@ public class BuildingController : MonoBehaviour
     public Player player;
     private bool buildMode;
     public float BuildTime = 5.0f;
-    public float BuildTimer = 10.0f;
+    public float BuildTimer = 0.0f;
     public AudioClip Yes, No, Build, LowPower;
     public bool BuildMode 
     { 
